@@ -5,7 +5,6 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { UserModel } from './../models/user.model';
-import { UsersServicesModule } from '../users-services.module';
 
 const userList: Array<UserModel> = [
   new UserModel(1, 'Anna', 'Borisova'),
@@ -16,15 +15,13 @@ const userList: Array<UserModel> = [
 const userListObservable: Observable<Array<UserModel>> = of(userList);
 
 @Injectable({
-  providedIn: UsersServicesModule
+  providedIn: 'any'
 })
 export class UserArrayService {
-  getUsers(): Observable<UserModel[]> {
-    return userListObservable;
-  }
+  users$: Observable<UserModel[]> = userListObservable;
 
   getUser(id: number | string): Observable<UserModel> {
-    return this.getUsers().pipe(
+    return this.users$.pipe(
       map((users: Array<UserModel>) => users.find(user => user.id === +id)),
       catchError(err => throwError('Error in getUser method'))
     );

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { Router, RouterOutlet, NavigationEnd, NavigationStart } from '@angular/router';
 
 // rxjs
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { SpinnerService } from './widgets';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private sub: Subscription;
+  private sub: { [key: string]: Subscription } = {};
 
   constructor(
     public messagesService: MessagesService,
@@ -32,10 +32,12 @@ export class AppComponent implements OnInit, OnDestroy {
     //   this.preloadingStrategy.preloadedModules
     // );
     // this.setPageTitles();
+    this.setMessageServiceOnRefresh();
   }
 
   ngOnDestroy() {
-    // this.sub.unsubscribe();
+    this.sub.navigationStart.unsubscribe();
+    // this.sub.navigationEnd.unsubscribe();
   }
 
   onDisplayMessages(): void {
@@ -47,18 +49,18 @@ export class AppComponent implements OnInit, OnDestroy {
    * @param $event - component instance
    */
   onActivate($event: any, routerOutlet: RouterOutlet) {
-    // console.log('Activated Component', $event, routerOutlet);
+    console.log('Activated Component', $event, routerOutlet);
     // another way to set titles
     this.titleService.setTitle(routerOutlet.activatedRouteData.title);
     this.metaService.addTags(routerOutlet.activatedRouteData.meta);
   }
 
   onDeactivate($event: any, routerOutlet: RouterOutlet) {
-    // console.log('Deactivated Component', $event, routerOutlet);
+    console.log('Deactivated Component', $event, routerOutlet);
   }
 
-  private setPageTitlesAndMeta() {
-    this.sub = this.router.events
+  private setPageTitles() {
+    this.sub.navigationEnd = this.router.events
       .pipe(
         // NavigationStart, NavigationEnd, NavigationCancel,
         // NavigationError, RoutesRecognized, ...
@@ -86,5 +88,14 @@ export class AppComponent implements OnInit, OnDestroy {
         switchMap(route => route.data)
       )
       .subscribe(data => this.titleService.setTitle(data.title));
+  }
+
+  private setMessageServiceOnRefresh() {
+    this.sub.navigationStart = this.router.events
+      .pipe(filter(event => event instanceof NavigationStart))
+      .subscribe((event: NavigationStart) => {
+        this.messagesService.isDisplayed = event.url.includes('messages:');
+      });
+
   }
 }

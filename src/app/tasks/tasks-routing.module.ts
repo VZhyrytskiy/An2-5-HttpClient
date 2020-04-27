@@ -7,11 +7,11 @@ import { TaskListComponent, TaskFormComponent } from './components';
 const metaTags: Array<MetaDefinition> = [
   {
     name: 'description',
-    content: 'Task Manager Application. This is an ASP application'
+    content: 'Task Manager Application. This is SPA'
   },
   {
     name: 'keywords',
-    content: 'Angular tutorial, SPA Application, Routing'
+    content: 'Angular tutorial, SPA, Routing'
   }
 ];
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { TaskModel } from './../models/task.model';
-import { TasksServicesModule } from '../tasks-services.module';
 
 const taskList = [
   new TaskModel(1, 'Estimate', 1, 8, 8, true),
@@ -12,7 +11,7 @@ const taskList = [
 const taskListPromise = Promise.resolve(taskList);
 
 @Injectable({
-  providedIn: TasksServicesModule
+  providedIn: 'any'
 })
 export class TaskArrayService {
   getTasks(): Promise<TaskModel[]> {
