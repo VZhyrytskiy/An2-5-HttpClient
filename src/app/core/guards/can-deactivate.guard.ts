@@ -18,6 +18,6 @@ export class CanDeactivateGuard
     | boolean
     | UrlTree {
     console.log('CanDeactivate Guard is called');
-    return component.canDeactivate();
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 }

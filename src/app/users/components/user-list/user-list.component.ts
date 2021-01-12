@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 // rxjs
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 import { UserModel } from './../../models/user.model';
 import { UserArrayService } from './../../services/user-array.service';
@@ -24,7 +24,13 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.users$ = this.userArrayService.users$;
+    this.users$ = this.userArrayService.users$
+      .pipe(
+        catchError(err => {
+          console.log(err);
+          return EMPTY;
+        })
+      );
 
     // listen editedUserID from UserFormComponent
     const observer = {
