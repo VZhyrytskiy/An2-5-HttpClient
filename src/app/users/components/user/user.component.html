@@ -1,13 +1,16 @@
-<div class="panel panel-default">
-    <div class="panel-heading">User</div>
-    <div class="panel-body">
-        <ul>
-            <li>FirstName: {{user.firstName}}</li>
-            <li>LastName: {{user.lastName}}</li>
-        </ul>
-        <button class="btn btn-warning btn-sm"
-            (click)="onEditUser()">
-            Edit
-        </button>
-    </div>
-</div>
+<mat-card style="margin-bottom: 20px">
+  <mat-card-header>
+    <mat-card-title>User</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li>FirstName: {{ user.firstName }}</li>
+      <li>LastName: {{ user.lastName }}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onEditUser()">
+      Edit
+    </button>
+  </mat-card-actions>
+</mat-card>

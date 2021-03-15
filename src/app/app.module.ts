@@ -13,16 +13,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { SpinnerModule } from './widgets/spinner/spinner.module';
 
 import { AppComponent } from './app.component';
+import { MaterialModule } from './shared/material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MaterialModule,
     FormsModule,
     LayoutModule,
     TasksModule,
     SpinnerModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     // add this line if you don't have access to

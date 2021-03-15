@@ -1,13 +1,16 @@
 .spinner {
   color: #337ab7;
+  z-index: 100;
+  top: calc(50% - 0.5em);
+  left: calc(50% - 0.5em);
   font-size: 30px;
   text-indent: -9999em;
   overflow: hidden;
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  margin: 72px auto;
-  position: relative;
+  margin: 0;
+  position: absolute;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

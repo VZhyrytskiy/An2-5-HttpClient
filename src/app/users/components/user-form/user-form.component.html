@@ -1,38 +1,39 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="pannel-title">
-            User Form
-        </h4>
-    </div>
-    <div class="panel-body">
-        <form (ngSubmit)="onSaveUser()" id="user-form" #form="ngForm">
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text"
-                class="form-control"
-                id="firstName" name="firstName"
-                placeholder="First Name"
-                required
-                [(ngModel)]="user.firstName">
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text"
-                class="form-control"
-                id="lastName" name="lastName"
-                placeholder="Last Name"
-                [(ngModel)]="user.lastName">
-          </div>
-          <button class="btn btn-primary"
-            [disabled]="form.invalid"
-            type="submit">Save
-        </button>
-        <button class="btn btn-primary"
-            type="button"
-            (click)="onGoBack()">Back
-        </button>
-        </form>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>User Form</mat-card-title>
+  </mat-card-header>
+  <form (ngSubmit)="onSaveUser()" #form="ngForm">
+    <mat-card-content>
+      <mat-form-field appearance="fill"  style="width: 100%;">
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+          required
+          [(ngModel)]="user.firstName"
+        />
+      </mat-form-field>
 
-    </div>
-</div>
-
+      <p>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            [(ngModel)]="user.lastName"
+          />
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="onGoBack()">
+        Back
+      </button>
+      <button mat-raised-button color="primary" type="submit" >Save</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

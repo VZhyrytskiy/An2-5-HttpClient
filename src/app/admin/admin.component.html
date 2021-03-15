@@ -1,21 +1,33 @@
 <h3>Admin</h3>
-<nav>
-  <ul class="nav nav-tabs">
-    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a routerLink="./"
-         queryParamsHandling="preserve"
-         preserveFragment>Dashboard</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./tasks"
-         queryParamsHandling="preserve"
-         preserveFragment>Manage Tasks</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="./users"
-         queryParamsHandling="preserve"
-         preserveFragment>Manage Users</a>
-    </li>
-  </ul>
+<nav mat-tab-nav-bar >
+  <a
+    mat-tab-link
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLinkActive="active"
+    queryParamsHandling="preserve"
+    routerLink="./"
+    (click)="activeLink = './'"
+    [active]="activeLink == './'"
+  >
+    Dashboard
+  </a>
+  <a
+    mat-tab-link
+    routerLinkActive="active"
+    routerLink="./tasks"
+    (click)="activeLink = './tasks'"
+    [active]="activeLink == './tasks'"
+  >
+    Manage Tasks
+  </a>
+  <a
+    mat-tab-link
+    queryParamsHandling="preserve"
+    routerLink="./users"
+    (click)="activeLink = './users'"
+    [active]="activeLink == './users'"
+  >
+    Manage Users
+  </a>
 </nav>
 <router-outlet></router-outlet>
