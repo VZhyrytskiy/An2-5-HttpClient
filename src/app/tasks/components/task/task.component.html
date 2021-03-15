@@ -1,21 +1,21 @@
-<div class="panel panel-default">
-    <div class="panel-heading">Task</div>
-    <div class="panel-body">
-        <ul>
-            <li>Action: {{task.action}}</li>
-            <li>Priority: {{task.priority}}</li>
-            <li>Estimate Hours: {{task.estHours}}</li>
-            <li>Actual Hours: {{task.actHours}}</li>
-            <li>Done: {{task.done}}</li>
-        </ul>
-        <button class="btn btn-primary btn-sm"
-            (click)="onCompleteTask()"
-            [disabled]="task.done">
-            Done
-        </button>
-        <button class="btn btn-warning btn-sm"
-            (click)="onEditTask()">
-            Edit
-        </button>
-    </div>
-</div>
+<mat-card style="margin-bottom: 20px">
+  <mat-card-header >
+    <mat-card-title>Task</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      
+    <ul>
+      <li>Action: {{ task.action }}</li>
+      <li>Priority: {{ task.priority }}</li>
+      <li>Estimate Hours: {{ task.estHours }}</li>
+      <li>Actual Hours: {{ task.actHours }}</li>
+      <li>Done: {{ task.done }}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onCompleteTask()" [disabled]="task.done">
+      Done
+    </button>
+    <button mat-raised-button color="primary" (click)="onEditTask()">Edit</button>
+  </mat-card-actions>
+</mat-card>

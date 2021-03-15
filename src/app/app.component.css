@@ -1,0 +1,22 @@
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 36px;
+}
+
+.sidenav-container {
+  height: 100%;
+  width: 100%;
+}
+
+.main-view {
+  padding: 50px 7%;
+}
+.main-view-left {
+  max-width: 80%;
+  min-width: 175px;
+}
+
+.main-view-right {
+  min-width: 175px;
+  padding-left: 20px;
+}

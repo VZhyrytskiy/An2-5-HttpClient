@@ -1,51 +1,62 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="pannel-title">
-            Task Form
-        </h4>
-    </div>
-    <div class="panel-body">
-        <form *ngIf="task" (ngSubmit)="onSaveTask()" id="task-form" #form="ngForm">
-          <div class="form-group">
-            <label for="action">Action</label>
-            <input type="text"
-                class="form-control"
-                id="action" name="action"
-                placeholder="Action"
-                required
-                [(ngModel)]="task.action">
-          </div>
-          <div class="form-group">
-            <label for="priority">Priority</label>
-            <input type="number"
-                min="1" max="3"
-                class="form-control"
-                id="priority" name="priority"
-                placeholder="Priority"
-                [(ngModel)]="task.priority">
-          </div>
-          <div class="form-group">
-            <label for="estHours">Est. Hours</label>
-            <input type="number"
-                min="0"
-                step="2"
-                class="form-control"
-                id="estHours" name="estHours"
-                placeholder="Est. Hours"
-                [(ngModel)]="task.estHours">
-          </div>
-          <button
-              type="submit"
-              class="btn btn-primary"
-              form="task-form"
-              [disabled]="form.invalid">Save
-          </button>
-          <button
-              type="button"
-              class="btn btn-primary"
-              (click)="onGoBack()">Back
-          </button>
-        </form>
-    </div>
-</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Task Form</mat-card-title>
+  </mat-card-header>
+  <form (ngSubmit)="onSaveTask()" #form="ngForm">
+    <mat-card-content>
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Action</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          name="action"
+          placeholder="Action"
+          required
+          [(ngModel)]="task.action"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Priority</mat-label>
+        <input
+          matInput
+          required
+          type="number"
+          min="1"
+          max="3"
+          name="priority"
+          placeholder="Priority"
+          [(ngModel)]="task.priority"
+        />
+      </mat-form-field>
 
+      <p>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Est. Hours</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="2"
+            name="estHours"
+            placeholder="Est. Hours"
+            [(ngModel)]="task.estHours"
+          />
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="primary" (click)="onGoBack()">
+        Back
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Save
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

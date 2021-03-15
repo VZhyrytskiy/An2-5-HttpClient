@@ -1,58 +1,83 @@
-<div>
-    <div>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!--routerLink one-time binding-->
-              <a class="navbar-brand" routerLink="/home">Task Manager</a>
-            </div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    fixedInViewport="true"
+    [attr.role]="'dialog'"
+    [mode]="'over'"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list (click)="drawer.toggle()">
+      <a mat-list-item routerLink="/users">Users</a>
+      <a mat-list-item routerLink="/admin">Admin</a>
+      <a mat-list-item routerLink="/login">Login</a>
+      <a mat-list-item routerLink="/about">About</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button
+        fxShow="true"
+        fxHide.gt-xs="true"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon
+          aria-label="Side nav toggle icon"
+          *ngIf="!drawer.opened; else showCross"
+        >
+          menu
+        </mat-icon>
+        <ng-template #showCross>
+          <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+        </ng-template>
+      </button>
 
-            <div>
-              <ul class="nav navbar-nav">
-                <li routerLinkActive="active">
-                  <a routerLink="/users">Users</a>
-                </li>
+      <a routerLinkActive="mat-accent" mat-button routerLink="/home"
+        >Task Manager</a
+      >
+      <!-- we can use flex-layout directives without values, which means true-->
+      <div fxShow fxHide.lt-sm>
+        <a routerLinkActive="mat-accent" mat-button routerLink="/users"
+          >Users</a
+        >
+        <a routerLinkActive="mat-accent" mat-button routerLink="/admin"
+          >Admin</a
+        >
+        <a routerLinkActive="mat-accent" mat-button routerLink="/login"
+          >Login</a
+        >
+        <a routerLinkActive="mat-accent" mat-button routerLink="/about"
+          >About</a
+        >
+      </div>
+    </mat-toolbar>
 
-                <li routerLinkActive="active">
-                  <a routerLink="/admin">Admin</a>
-                </li>
-
-                <li routerLinkActive="active">
-                  <a routerLink="/login">Login</a>
-                </li>
-
-                <li routerLinkActive="active">
-                  <!--routerLink one-time binding-->
-                  <a routerLink="/about">About</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <div class="container">
-          <app-spinner *ngIf="spinnerService.isVisible()"></app-spinner>
-          <div class="col-md-10">
-            <!-- #routerOutlet="outlet" - access to the properties of router-outlet directive -->
-            <router-outlet
-                #routerOutlet="outlet"
-                (activate)='onActivate($event, routerOutlet)'
-                (deactivate)='onDeactivate($event, routerOutlet)'>
-            </router-outlet>
-            <!-- Routed views go here -->
-          </div>
-          <div class="col-md-2">
-            <button class="btn btn-success"
-                    *ngIf="!messagesService.isDisplayed"
-                    (click)="onDisplayMessages()">Show Messages</button>
-            <router-outlet name="messages"></router-outlet>
-          </div>
+    <div class="main-view">
+      <app-spinner *ngIf="spinnerService.isVisible()"></app-spinner>
+      <div class="main-view-left" fxFlex="80" fxFlex.xs="80">
+        <router-outlet
+          #routerOutlet="outlet"
+          (activate)="onActivate($event, routerOutlet)"
+          (deactivate)="onDeactivate($event, routerOutlet)"
+        >
+        </router-outlet>
+      </div>
+      <div class="main-view-right">
+        <button
+          *ngIf="!messagesService.isDisplayed"
+          mat-raised-button
+          color="accent"
+          (click)="onDisplayMessages()"
+        >
+          Show Messages
+        </button>
+        <div >
+          <router-outlet
+            name="messages"
+          ></router-outlet>
         </div>
+      </div>
     </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

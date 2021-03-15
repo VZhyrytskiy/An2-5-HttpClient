@@ -8,9 +8,10 @@ import {
   LoginComponent,
   PathNotFoundComponent
 } from './components';
+import { MaterialModule } from '../shared/material/material.module';
 
 @NgModule({
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MaterialModule,],
   declarations: [
     AboutComponent,
     PathNotFoundComponent,
